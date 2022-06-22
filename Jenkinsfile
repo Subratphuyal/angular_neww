@@ -30,13 +30,16 @@ pipeline {
         }
         stage('upload artifacts to s3') {
             steps {
-              withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentailss', keyFileVariable: 'sshKey', passphraseVariable: '', usernameVariable: 'sshuser')]) {    
+              script{
+                withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentailss', keyFileVariable: 'sshKey', passphraseVariable: '', usernameVariable: 'sshuser')]) {    
                     remote.user = sshuser
                     remote.identityFile = sshkey
                     sshPut remote: remote, from: 'build', into: '.'  
                     sshCommand remote: remote, command: "pwd"
                     
                     }
+              }
+              
                
             }
         }
