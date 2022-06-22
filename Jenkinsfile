@@ -1,3 +1,7 @@
+def remote = [:]
+remote.name = "angular_testts"
+remote.host = "52.203.232.153"
+remote.allowAnyHosts = true
 pipeline {
   agent{
     dockerfile true
@@ -32,10 +36,13 @@ pipeline {
         }
         stage('upload artifacts to s3') {
             steps {
-              withCredentials([file(credentialsId: 'aws_credentialss', variable: 'aws_credential')]) {
-                s3Upload(file:"${file}", bucket:"${bucket}")
-    
-            }
+              withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentailss', keyFileVariable: 'sshKey', passphraseVariable: '', usernameVariable: 'sshuser')]) {    
+                    remote.user = sshuser
+                    remote.identityFile = sshKey
+                    sshPut remote: remote, from: 'build', into: '.'  
+                    sshCommand remote: remote, command: "pwd"
+                    
+                    }
                
             }
         }
