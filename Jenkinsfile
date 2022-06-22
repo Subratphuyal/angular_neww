@@ -1,7 +1,3 @@
-def remote = [:]
-remote.name = "angular_testts"
-remote.host = "52.203.232.153"
-remote.allowAnyHosts = true
 pipeline {
   agent{
     dockerfile true
