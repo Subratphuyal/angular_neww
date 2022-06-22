@@ -32,7 +32,7 @@ pipeline {
         }
         stage('upload artifacts to s3') {
             steps {
-              withAWS(region:"${region}", credentials:"${aws_credential})
+              withAWS(region:"${region}", credentials:"${aws_credential}")
                 script {
                 sh '''
                 s3Upload(file:"${file}", bucket:"${bucket}")
