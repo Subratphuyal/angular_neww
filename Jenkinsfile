@@ -33,16 +33,12 @@ pipeline {
               script{
                 withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentailss', keyFileVariable: 'sshKey', passphraseVariable: '', usernameVariable: 'sshuser')]) {    
                     remote.user = sshuser
-                    remote.identityFile = sshkey
+                    remote.identityFile = sshKey
                     sshPut remote: remote, from: 'build', into: '.'  
                     sshCommand remote: remote, command: "pwd"
-                    
-                    }
-              }
-              
-               
+                }
+              }  
             }
         }
-        
     }
 }
