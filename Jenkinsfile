@@ -6,7 +6,7 @@ pipeline {
         aws_credential = "aws_credentailss"
         bucket = "subrat-angular-test"
         region = "us-east-1"
-        file = ""dist/new_angular_app*
+        file = "dist/new_angular_app*"
   }      
   tools {nodejs "node_js"}
       
