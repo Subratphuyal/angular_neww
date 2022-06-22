@@ -38,8 +38,10 @@ pipeline {
             steps {
                withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentialss', keyFileVariable: 'privateKey', passphraseVariable: '')]) {    
                     remote.identityFile = privateKey
-                    sshPut remote: remote, from: 'build', into: '.'  
-                    sshCommand remote: remote, command: "s3Upload(file:"${file}", bucket:"${bucket}")"
+                      
+                    sh'''
+                    s3Upload(file:"${file}", bucket:"${bucket}")
+                    '''
                     
                     
                     
