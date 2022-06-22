@@ -36,8 +36,7 @@ pipeline {
         }
         stage('upload artifacts to s3') {
             steps {
-               withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentialss', keyFileVariable: 'privateKey', passphraseVariable: '')]) {    
-                    remote.identityFile = privateKey
+               withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentialss', keyFileVariable: 'privateKey', passphraseVariable: '')]) {
                       
                     sh'''
                     s3Upload(file:"${file}", bucket:"${bucket}")
