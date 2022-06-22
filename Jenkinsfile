@@ -19,7 +19,7 @@ pipeline {
             }
         }
         
-        stage('building step') {
+        stage('build') {
             steps {
                 script {
                 sh '''
