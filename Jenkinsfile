@@ -1,6 +1,6 @@
 def remote = [:]
 remote.name = "angular_testts"
-remote.host = "52.203.232.153"
+remote.host = "18.215.168.203"
 remote.allowAnyHosts = true
 pipeline {
   agent{
