@@ -1,6 +1,6 @@
 def remote = [:]
 remote.name = "angular_testts"
-remote.host = "18.215.168.203"
+remote.host = "3.91.5.117"
 remote.allowAnyHosts = true
 pipeline {
   agent{
@@ -31,11 +31,14 @@ pipeline {
         stage('upload artifacts to s3') {
             steps {
               script{
-                withCredentials([sshUserPrivateKey(credentialsId: 'aws_credentials', keyFileVariable: 'sshKey', passphraseVariable: '', usernameVariable: 'sshuser')]) {    
+                withCredentials([sshUserPrivateKey(credentialsId: 'aws-credentialss', keyFileVariable: 'sshkey', passphraseVariable: '', usernameVariable: 'sshuser')]) {    
                     remote.user = sshuser
-                    remote.identityFile = sshKey 
-                    sshCommand remote: remote, command: "pwd"
-                }
+                    remote.identityFile = sshkey
+                    
+                    sshCommand remote: remote, command: "ls -la"
+                    sshCommand remote: remote, command: "cd /home/ubuntu/brp-website-fe && pwd"
+                    
+                    }
               }  
             }
         }
